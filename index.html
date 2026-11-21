@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f5f4f0">
+  <meta name="description" content="Thetaks — Your day, your control.">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <title>Thetaks</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand"><div class="brand-mark">t.</div><span>Thetaks</span></div>
+      <button class="icon-btn" id="themeBtn" aria-label="Ganti tema">◐</button>
+    </header>
+
+    <main>
+      <section class="welcome">
+        <p class="eyebrow" id="todayLabel">YOUR DAILY SPACE</p>
+        <h1 id="greeting">Make today<br><em>count.</em></h1>
+        <p class="subtle">Satu langkah kecil tetap sebuah kemajuan.</p>
+      </section>
+
+      <section class="summary-card">
+        <div class="summary-head">
+          <div><p class="eyebrow">DAILY PROGRESS</p><h2 id="progressText">0% completed</h2></div>
+          <div class="progress-ring" id="progressRing"><span id="progressNumber">0%</span></div>
+        </div>
+        <div class="progress-track"><div id="progressBar"></div></div>
+        <p class="summary-foot"><span id="doneCount">0 selesai</span><span id="leftCount">0 tersisa</span></p>
+      </section>
+
+      <section class="task-section">
+        <div class="section-heading">
+          <div><p class="eyebrow">STAY ON TRACK</p><h2>Today's tasks</h2></div>
+          <button class="text-btn" id="clearDone">Clear done</button>
+        </div>
+        <div class="filters" id="filters">
+          <button class="filter active" data-filter="all">All</button>
+          <button class="filter" data-filter="active">To do</button>
+          <button class="filter" data-filter="done">Completed</button>
+        </div>
+        <div id="taskList" class="task-list"></div>
+        <div id="emptyState" class="empty-state">
+          <div class="empty-icon">✳</div>
+          <h3>No tasks yet</h3>
+          <p>Mulai dengan menambahkan satu hal yang ingin lu selesaikan hari ini.</p>
+        </div>
+      </section>
+
+      <section class="calendar-section" id="calendarView" hidden>
+        <div class="section-heading"><div><p class="eyebrow">PLAN AHEAD</p><h2>Your calendar</h2></div></div>
+        <div class="calendar-card">
+          <div class="calendar-month-row"><button class="icon-btn month-btn" id="prevMonth" aria-label="Bulan sebelumnya">‹</button><h3 id="monthTitle">Month Year</h3><button class="icon-btn month-btn" id="nextMonth" aria-label="Bulan berikutnya">›</button></div>
+          <div class="calendar-grid weekday-row"><span>Min</span><span>Sen</span><span>Sel</span><span>Rab</span><span>Kam</span><span>Jum</span><span>Sab</span></div>
+          <div class="calendar-grid" id="calendarDays"></div><div class="calendar-legend"><span class="legend-dot"></span> Ada tugas</div>
+        </div>
+        <div class="calendar-agenda"><p class="eyebrow">SELECTED DAY</p><h3 id="selectedDateTitle">Today's agenda</h3><div id="calendarAgenda"></div></div>
+      </section>
+    </main>
+
+    <button class="add-fab" id="addBtn"><span>＋</span> Add a task</button>
+    <nav class="bottom-nav">
+      <div class="nav-item selected"><span>◫</span><small>Today</small></div>
+      <div class="nav-item" id="allNav"><span>☷</span><small>All tasks</small></div>
+      <div class="nav-item" id="calendarNav"><span>▦</span><small>Calendar</small></div>
+      <div class="nav-item" id="focusNav"><span>◷</span><small>Focus</small></div>
+    </nav>
+  </div>
+
+  <div class="modal-backdrop" id="modal">
+    <form class="task-modal" id="taskForm">
+      <div class="modal-top"><div><p class="eyebrow">MAKE IT HAPPEN</p><h2 id="modalTitle">New task</h2></div><button type="button" class="icon-btn" id="closeModal">×</button></div>
+      <label for="taskTitle">Task name</label>
+      <input id="taskTitle" maxlength="90" placeholder="What needs to be done?" required>
+      <div class="form-row">
+        <div><label for="taskCategory">Category</label><select id="taskCategory"><option>Personal</option><option>School</option><option>Work</option><option>Health</option><option>Other</option></select></div>
+        <div><label for="taskPriority">Priority</label><select id="taskPriority"><option value="low">Low</option><option value="medium" selected>Medium</option><option value="high">High</option></select></div>
+      </div>
+      <label for="taskDate">Due date</label>
+      <input id="taskDate" type="date">
+      <input id="editingId" type="hidden">
+      <button class="primary-btn" type="submit">Save task <span>↗</span></button>
+    </form>
+  </div>
+  <div class="toast" id="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
